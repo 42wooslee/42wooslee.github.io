@@ -1,0 +1,56 @@
+body {
+    background-color: #000033;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+#solar-system {
+    position: relative;
+    width: 600px;
+    height: 600px;
+	transform-origin: center;
+}
+
+#sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: yellow;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#orbit1 { width: 200px; height: 200px; }
+#orbit2 { width: 300px; height: 300px; }
+#orbit3 { width: 400px; height: 400px; }
+
+.planet {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+#tooltip {
+    position: absolute;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}

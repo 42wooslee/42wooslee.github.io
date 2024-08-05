@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터랙티브 태양계</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="solar-system">
+        <div id="sun" class="celestial-body" data-info="태양 정보"></div>
+        <div class="orbit" id="orbit1">
+            <div class="planet" data-info="수성 정보"></div>
+        </div>
+        <div class="orbit" id="orbit2">
+            <div class="planet" data-info="금성 정보"></div>
+            <div class="planet" data-info="지구 정보"></div>
+        </div>
+        <div class="orbit" id="orbit3">
+            <div class="planet" data-info="화성 정보"></div>
+        </div>
+    </div>
+    <div id="tooltip"></div>
+    <script src="script.js"></script>
+</body>
+</html>
