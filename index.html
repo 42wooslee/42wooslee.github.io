@@ -6,11 +6,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <title>42wooslee</title>
   </head>
   <body>
-    <div class="fira-code-test">Hello, World!</div>
+    <!-- <div class="fira-code-test">Hello, World!</div> -->
+    <div id="terminal"></div>
+    <div id="terminalOutput"> Hello, World! </div>
+    <div id="terminalInput" contenteditable="true" spellcheck="false" ></div>
+    <div id="terminalCaret"></div>
     <script src="three.min.js"></script>
     <script>
+
+      /* space background */
       let scene, camera, renderer, stars, starGeo;
       let animationId = null;
       let isAnimating = false;
@@ -18,129 +25,205 @@
       
       function init() {
 
-      scene = new THREE.Scene();
+        scene = new THREE.Scene();
 
-      camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.z = 1;
-      camera.rotation.x = Math.PI/2;
+        camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
+        camera.position.z = 1;
+        camera.rotation.x = Math.PI/2;
 
-      renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-
-      starGeo = new THREE.Geometry();
-      for(let i=0;i<6000;i++) {
-        star = new THREE.Vector3(
-          Math.random() * 600 - 300,
-          Math.random() * 600 - 300,
-          Math.random() * 600 - 300
-        );
-        star.velocity = 0;
-        star.acceleration = 0.02;
-        starGeo.vertices.push(star);
-      }
-
-      let sprite = new THREE.TextureLoader().load( 'images/star.png' );
-      let starMaterial = new THREE.PointsMaterial({
-        color: 0xaaaaaa,
-        size: 0.7,
-        map: sprite
-      });
-
-      stars = new THREE.Points(starGeo,starMaterial);
-      scene.add(stars);
-
-      idle();
-
-      window.addEventListener("resize", onWindowResize, false);
-      window.addEventListener("keydown", onKeyDown, false);
-    }
-
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+        document.body.appendChild(renderer.domElement);
 
-    function warp() {
-      starGeo.vertices.forEach(p => {
-        p.velocity += p.acceleration
-        p.y -= p.velocity;
-        
-        if (p.y < -200) {
-          p.y = 200;
-        }
-      });
-      starGeo.verticesNeedUpdate = true;
-    
-      renderer.render(scene, camera);
-      
-      if (isAnimating) {
-        animationId = requestAnimationFrame(warp);
-      }
-    }
-
-    function slowDown() {
-      let allStopped = true;
-      starGeo.vertices.forEach(p => {
-        p.velocity *= 0.98;
-        p.y -= p.velocity;
-        
-        if (p.y < -200) {
-          p.y = 200;
+        starGeo = new THREE.Geometry();
+        for(let i=0;i<6000;i++) {
+          star = new THREE.Vector3(
+            Math.random() * 600 - 300,
+            Math.random() * 600 - 300,
+            Math.random() * 600 - 300
+          );
+          star.velocity = 0;
+          star.acceleration = 0.02;
+          starGeo.vertices.push(star);
         }
 
-        if (Math.abs(p.velocity) > 0.01) {
-          allStopped = false;
-        }
-      });
+        let sprite = new THREE.TextureLoader().load( 'images/star.png' );
+        let starMaterial = new THREE.PointsMaterial({
+          color: 0xaaaaaa,
+          size: 0.7,
+          map: sprite
+        });
 
-      stars.rotation.y += 0.0001;
-      starGeo.verticesNeedUpdate = true;
-    
-      renderer.render(scene, camera);
-      
-      if (!allStopped) {
-        animationId = requestAnimationFrame(slowDown);
-      } else {
-        isSlowingDown = false;
+        stars = new THREE.Points(starGeo,starMaterial);
+        scene.add(stars);
+
         idle();
-      }
-    }
 
-    function idle() {
-      starGeo.vertices.forEach(p => {
-        p.velocity = 0;
+        window.addEventListener("resize", onWindowResize, false);
+        window.addEventListener("keydown", onKeyDown, false);
+      }
+
+      function onWindowResize() {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function warp() {
+        starGeo.vertices.forEach(p => {
+          p.velocity += p.acceleration
+          p.y -= p.velocity;
+          
+          if (p.y < -200) {
+            p.y = 200;
+          }
+        });
+        starGeo.verticesNeedUpdate = true;
+      
+        renderer.render(scene, camera);
+        
+        if (isAnimating) {
+          animationId = requestAnimationFrame(warp);
+        }
+      }
+
+      function slowDown() {
+        let allStopped = true;
+        starGeo.vertices.forEach(p => {
+          p.velocity *= 0.98;
+          p.y -= p.velocity;
+          
+          if (p.y < -200) {
+            p.y = 200;
+          }
+
+          if (Math.abs(p.velocity) > 0.01) {
+            allStopped = false;
+          }
+        });
+
+        stars.rotation.y += 0.0001;
+        starGeo.verticesNeedUpdate = true;
+      
+        renderer.render(scene, camera);
+        
+        if (!allStopped) {
+          animationId = requestAnimationFrame(slowDown);
+        } else {
+          isSlowingDown = false;
+          idle();
+        }
+      }
+
+      function idle() {
+        starGeo.vertices.forEach(p => {
+          p.velocity = 0;
+        });
+
+        stars.rotation.y +=0.0001;
+        starGeo.verticesNeedUpdate = true;
+      
+        renderer.render(scene, camera);
+        
+        if (!isAnimating) {
+          animationId = requestAnimationFrame(idle);
+        }
+      }
+
+      function onKeyDown(event) {
+        if (event.key === "Enter") {
+          toggleAnimation();
+        }
+      }
+
+      function toggleAnimation() {
+        isAnimating = !isAnimating;
+        if (isAnimating) {
+          warp();
+        } else {
+          isSlowingDown = true;
+          slowDown();
+        }
+      }
+      init();
+
+
+      /* always focus */
+      function focusInput() {
+        const input = document.getElementById('terminalInput');
+        input.focus();
+      }
+
+      window.addEventListener('load', focusInput);
+
+      const inputField = document.getElementById('terminalInput');
+
+      inputField.addEventListener('blur', function() {
+        this.focus();
       });
 
-      stars.rotation.y +=0.0001;
-      starGeo.verticesNeedUpdate = true;
-    
-      renderer.render(scene, camera);
+      inputField.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.focus();
+        }
+      });
+
+
+      /* block caret */
+      const editable = document.getElementById('terminalInput');
+      const caret = document.getElementById('terminalCaret');
+
+      function updateCaretPosition() {
+        const sel = window.getSelection();
+        if (sel.rangeCount > 0) {
+          const range = sel.getRangeAt(0);
+          if (range.collapsed) {
+            caret.style.visibility = 'visible';
+            if (editable.textContent.length === 0) {
+              const tempSpan = document.createElement('span');
+              tempSpan.textContent = ' ';
+              tempSpan.style.visibility = 'hidden';
+              editable.appendChild(tempSpan);
+              
+              const rect = tempSpan.getBoundingClientRect();
+              caret.style.left = `${rect.left + window.scrollX}px`;
+              caret.style.top = `${rect.top + window.scrollY}px`;
+              caret.style.height = `${rect.height}px`;
+              
+              editable.removeChild(tempSpan);
+            } else {
+              const rect = range.getBoundingClientRect();
+              caret.style.left = `${rect.left + window.scrollX}px`;
+              caret.style.top = `${rect.top + window.scrollY}px`;
+              caret.style.height = `${rect.height}px`;
+            }
+          } else {
+            caret.style.visibility = 'hidden';
+          }
+        } else {
+          caret.style.visibility = 'hidden';
+        }
+      }
+
+      let isUpdating = false;
+
+      function debouncedUpdateCaretPosition() {
+        if (isUpdating) return;
+        isUpdating = true;
+        
+        requestAnimationFrame(() => {
+          updateCaretPosition();
+          isUpdating = false;
+        });
+      }
+
+      editable.addEventListener('keydown', debouncedUpdateCaretPosition);
+      editable.addEventListener('keyup', debouncedUpdateCaretPosition);
+      editable.addEventListener('selectionchange', debouncedUpdateCaretPosition);
       
-      if (!isAnimating) {
-        animationId = requestAnimationFrame(idle);
-      }
-    }
+      debouncedUpdateCaretPosition();
 
-    function onKeyDown(event) {
-      if (event.key === "Enter") {
-        toggleAnimation();
-      }
-    }
-
-    function toggleAnimation() {
-      isAnimating = !isAnimating;
-      if (isAnimating) {
-        warp();
-      } else {
-        isSlowingDown = true;
-        slowDown();
-      }
-    }
-
-    init();
-    
     </script>
   </body>
 </html>
