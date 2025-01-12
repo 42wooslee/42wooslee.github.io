@@ -12,7 +12,7 @@ __※ 주의! 해당 웹사이트는 Flutter를 전혀 모르는 사람이 ChatG
 사용 방법은 다음과 같습니다.
 
 1. 운영자가 [구글 시트](https://docs.google.com/spreadsheets/d/1HsKNlr2l1-EW1oOSqyQWCHThAUWBCuIBe5MgVzC0x1w/edit?gid=0#gid=0)에 정기활동 날짜를 입력합니다.
-2. 입력한 날짜가 되면, [웹사이트](https://42wooslee.github.io)를 통해 출석체크가 가능합니다.
+2. 입력한 날짜가 되면, [웹사이트](https://42wooslee.github.io)에 아이디를 입력하여 출석체크를 진행합니다.
    
    * 오후 2시 50분부터 오후 3시 10분 사이에 출석을 진행할 경우, 정상출석 처리됩니다.
    * 온라인 출석을 체크했을 경우, 온라인출석으로 처리됩니다.
