@@ -38076,7 +38076,7 @@ n=[1]
 s=6
 break}a4=new A.dJ(Date.now(),0,!1)
 a5=A.a7h(a4)*60+A.a7i(a4)
-if(!(a5>=890&&a5<=930)){m.v6("\ucd9c\uc11d \uac00\ub2a5 \uc2dc\uac04\uc774 \uc544\ub2d9\ub2c8\ub2e4.")
+if(!(a5>=770&&a5<=870)){m.v6("\ucd9c\uc11d \uac00\ub2a5 \uc2dc\uac04\uc774 \uc544\ub2d9\ub2c8\ub2e4.")
 n=[1]
 s=6
 break}a=J.aqg(h,new A.adS(a7))
@@ -38111,7 +38111,7 @@ case 7:case 1:return A.U(q,r)
 case 2:return A.T(o,r)}})
 return A.V($async$kT,r)},
 a_L(){var s=new A.dJ(Date.now(),0,!1)
-if(A.a7h(s)*60+A.a7i(s)<=910)return this.e?"\uc628\ub77c\uc778 \ucd9c\uc11d":"\ucd9c\uc11d"
+if(A.a7h(s)*60+A.a7i(s)<=850)return this.e?"\uc628\ub77c\uc778 \ucd9c\uc11d":"\ucd9c\uc11d"
 return"\uc9c0\uac01"},
 v6(a){var s=this.c
 s.toString
